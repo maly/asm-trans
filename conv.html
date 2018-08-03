@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CONV</title>
+<style type="text/css" media="screen">
+    #editor {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width:500px;
+        font-size:16px;
+        font-family:monospace
+    }
+    #output {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 500px;
+        width:500px
+    }
+    aside {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 1030px;
+        width:200px
+    }
+</style>
+</head>
+<body>
+<div id="editor"> MOV A,A
+  MOV A,B
+  MOV A,C
+  MOV A,D
+  MOV A,E
+  MOV A,H
+  MOV A,L
+  MOV A,M
+  LDAX B
+  LDAX D
+  LDA word
+  MOV B,A
+  MOV B,B
+  MOV B,C
+  MOV B,D
+  MOV B,E
+  MOV B,H
+  MOV B,L
+  MOV B,M
+  MOV C,A
+  MOV C,B
+  MOV C,C
+  MOV C,D
+  MOV C,E
+  MOV C,H
+  MOV C,L
+  MOV C,M
+  MOV D,A
+  MOV D,B
+  MOV D,C
+  MOV D,D
+  MOV D,E
+  MOV D,H
+  MOV D,L
+  MOV D,M
+  MOV E,A
+  MOV E,B
+  MOV E,C
+  MOV E,D
+  MOV E,E
+  MOV E,H
+  MOV E,L
+  MOV E,M
+  MOV H,A
+  MOV H,B
+  MOV H,C
+  MOV H,D
+  MOV H,E
+  MOV H,H
+  MOV H,L
+  MOV H,M
+  MOV L,A
+  MOV L,B
+  MOV L,C
+  MOV L,D
+  MOV L,E
+  MOV L,H
+  MOV L,L
+  MOV L,M
+  MOV M,A
+  MOV M,B
+  MOV M,C
+  MOV M,D
+  MOV M,E
+  MOV M,H
+  MOV M,L
+  MVI A,byte
+  MVI B,byte
+  MVI C,byte
+  MVI D,byte
+  MVI E,byte
+  MVI H,byte
+  MVI L,byte
+  MVI M,byte
+  STAX B
+  STAX D
+  STA word
+  LXI B,word
+  LXI D,word
+  LXI H,word
+  LXI SP,word
+  LHLD word
+  SHLD word
+  SPHL
+  XCHG
+  XTHL
+  ADD A
+  ADD B
+  ADD C
+  ADD D
+  ADD E
+  ADD H
+  ADD L
+  ADD M
+  ADI byte
+  ADC A
+  ADC B
+  ADC C
+  ADC D
+  ADC E
+  ADC H
+  ADC L
+  ADC M
+  ACI byte
+  SUB A
+  SUB B
+  SUB C
+  SUB D
+  SUB E
+  SUB H
+  SUB L
+  SUB M
+  SUI byte
+  SBB A
+  SBB B
+  SBB C
+  SBB D
+  SBB E
+  SBB H
+  SBB L
+  SBB M
+  SBI byte
+  DAD B
+  DAD D
+  DAD H
+  DAD SP
+  DI
+  EI
+  NOP
+  HLT
+  INR A
+  INR B
+  INR C
+  INR D
+  INR E
+  INR H
+  INR L
+  INR M
+  DCR A
+  DCR B
+  DCR C
+  DCR D
+  DCR E
+  DCR H
+  DCR L
+  DCR M
+  INX B
+  INX D
+  INX H
+  INX SP
+  DCX B
+  DCX D
+  DCX H
+  DCX SP
+  DAA
+  CMA
+  STC
+  CMC
+  RLC
+  RRC
+  RAL
+  RAR
+  ANA A
+  ANA B
+  ANA C
+  ANA D
+  ANA E
+  ANA H
+  ANA L
+  ANA M
+  ANI byte
+  XRA A
+  XRA B
+  XRA C
+  XRA D
+  XRA E
+  XRA H
+  XRA L
+  XRA M
+  XRI byte
+  ORA A
+  ORA B
+  ORA C
+  ORA D
+  ORA E
+  ORA H
+  ORA L
+  ORA M
+  ORI byte
+  CMP A
+  CMP B
+  CMP C
+  CMP D
+  CMP E
+  CMP H
+  CMP L
+  CMP M
+  CPI byte
+  JMP address
+  JNZ address
+  JZ address
+  JNC address
+  JC address
+  JPO address
+  JPE address
+  JP address
+  JM address
+  PCHL
+  CALL address
+  CNZ address
+  CZ address
+  CNC address
+  CC address
+  CPO address
+  CPE address
+  CP address
+  CM address
+  RET
+  RNZ
+  RZ
+  RNC
+  RC
+  RPO
+  RPE
+  RP
+  RM
+  RST 0
+  RST 1
+  RST 2
+  RST 3
+  RST 4
+  RST 5
+  RST 6
+  RST 7
+  PUSH B
+  PUSH D
+  PUSH H
+  PUSH PSW
+  POP B
+  POP D
+  POP H
+  POP PSW
+  IN byte
+  OUT byte
+</div>
+
+<!--
+<textarea id="source" cols=60 rows=40>
+dim b(10)
+let a=[b(3)]
+
+
+</textarea>
+-->
+<textarea id="output" cols=60 rows=40></textarea>
+<aside>
+<button onclick="compile()">Convert</button>
+<br>
+<select id="model">
+  <option value="z2i">Z80->I8080</option>
+  <option value="i2z" selected>I8080->Z80</option>
+</select>
+
+<p><a href="https://github.com/maly/bas80/blob/master/README.md">README, manual etc.</a></p>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.3.3/ace.js"></script>
+<!--script src="./contribution/mode-basic.js"></script-->
+<script>
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/monokai");
+  editor.session.setMode("ace/mode/vbscript");
+</script>
+
+<script>
+
+</script>
+<script src="convert.js"></script>
+<script src="z2i.js"></script>
+<script src="i2z.js"></script>
+<script>
+
+
+
+var compile = function(){
+    var source
+
+    //= document.getElementById("source").value
+
+    source = editor.getValue()
+
+    source=source.replace(/\&gt\;/gs,">")
+    source=source.replace(/\&lt\;/gs,"<")
+
+    //source +="\nEND\n"
+    //var ENGINE = "OMENALPHA"
+    //var ENGINE = "OMENCHARLIE"
+
+    var trans;
+
+    switch (document.getElementById("model").value) {
+      case "z2i": trans = transZ2I; break
+      case "i2z": trans = transI2Z; break
+    }
+
+    var out = convert(source,trans)
+
+
+    //console.log(out)
+
+    document.getElementById("output").value = (out)
+}
+compile()
+</script>
