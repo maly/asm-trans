@@ -164,6 +164,12 @@ var transI2Z = {
   "adi": function adi(par1, par2) {
     return ["ADD", "A", regZ(par1)];
   },
+  "adc": function adc(par1, par2) {
+    return ["ADC", "A", regZ(par1)];
+  },
+  "aci": function aci(par1, par2) {
+    return ["ADC", "A", regZ(par1)];
+  },
   "sub": function sub(par1, par2) {
     return ["SUB", regZ(par1), ""];
   },
@@ -182,6 +188,127 @@ var transI2Z = {
   },
   "dcr": function dcr(par1, par2) {
     return ["DEC", regZ(par1), ""];
+  },
+
+  "inx": function inx(par1, par2) {
+    return ["INC", regPairZ(par1), ""];
+  },
+
+  "dcx": function dcx(par1, par2) {
+    return ["DEC", regPairZ(par1), ""];
+  },
+
+  "ana": function ana(par1, par2) {
+    return ["AND", regZ(par1), ""];
+  },
+  "ani": function ani(par1, par2) {
+    return ["AND", regZ(par1), ""];
+  },
+  "xra": function xra(par1, par2) {
+    return ["XOR", regZ(par1), ""];
+  },
+  "xri": function xri(par1, par2) {
+    return ["XOR", regZ(par1), ""];
+  },
+  "ora": function ora(par1, par2) {
+    return ["OR", regZ(par1), ""];
+  },
+  "ori": function ori(par1, par2) {
+    return ["OR", regZ(par1), ""];
+  },
+  "cmp": function cmp(par1, par2) {
+    return ["CP", regZ(par1), ""];
+  },
+  "cpi": function cpi(par1, par2) {
+    return ["CP", regZ(par1), ""];
+  },
+
+  "jmp": function jmp(par1, par2) {
+    return ["JP", par1, ""];
+  },
+  "jnz": function jnz(par1, par2) {
+    return ["JP", "NZ", par1];
+  },
+  "jz": function jz(par1, par2) {
+    return ["JP", "Z", par1];
+  },
+  "jnc": function jnc(par1, par2) {
+    return ["JP", "NC", par1];
+  },
+  "jc": function jc(par1, par2) {
+    return ["JP", "C", par1];
+  },
+  "jpe": function jpe(par1, par2) {
+    return ["JP", "PE", par1];
+  },
+  "jpo": function jpo(par1, par2) {
+    return ["JP", "PO", par1];
+  },
+  "jp": function jp(par1, par2) {
+    return ["JP", "P", par1];
+  },
+  "jm": function jm(par1, par2) {
+    return ["JP", "M", par1];
+  },
+
+  "call": function call(par1, par2) {
+    return ["CALL", par1, ""];
+  },
+  "cnz": function cnz(par1, par2) {
+    return ["CALL", "NZ", par1];
+  },
+  "cz": function cz(par1, par2) {
+    return ["CALL", "Z", par1];
+  },
+  "cnc": function cnc(par1, par2) {
+    return ["CALL", "NC", par1];
+  },
+  "cc": function cc(par1, par2) {
+    return ["CALL", "C", par1];
+  },
+  "cpe": function cpe(par1, par2) {
+    return ["CALL", "PE", par1];
+  },
+  "cpo": function cpo(par1, par2) {
+    return ["CALL", "PO", par1];
+  },
+  "cp": function cp(par1, par2) {
+    return ["CALL", "P", par1];
+  },
+  "cm": function cm(par1, par2) {
+    return ["CALL", "M", par1];
+  },
+
+  "ret": function ret(par1, par2) {
+    return ["RET", "", ""];
+  },
+  "rnz": function rnz(par1, par2) {
+    return ["RET", "NZ", ""];
+  },
+  "rz": function rz(par1, par2) {
+    return ["RET", "Z", ""];
+  },
+  "rnc": function rnc(par1, par2) {
+    return ["RET", "NC", ""];
+  },
+  "rc": function rc(par1, par2) {
+    return ["RET", "C", ""];
+  },
+  "rpe": function rpe(par1, par2) {
+    return ["RET", "PE", ""];
+  },
+  "rpo": function rpo(par1, par2) {
+    return ["RET", "PO", ""];
+  },
+  "rp": function rp(par1, par2) {
+    return ["RET", "P", ""];
+  },
+  "rm": function rm(par1, par2) {
+    return ["RET", "M", ""];
+  },
+
+  "rst": function rst(par1, par2) {
+    return ["RST", (parseInt(par1) * 8).toString(16) + "h", ""];
   },
 
   "push": function push(par1, par2) {
@@ -576,7 +703,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50838' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51734' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
