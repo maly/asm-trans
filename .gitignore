@@ -2,3 +2,5 @@ old/
 .make
 node_modules
 monolith.js
+.cache
+dist
