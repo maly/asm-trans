@@ -1,3 +1,45 @@
+var croak = function(m) {
+  throw new Error("Cannot convert "+m)
+}
+
+var isReg = function(par) {
+  return ("ABCDEHL".indexOf(par.toUpperCase()))<0?false:true
+}
+var isRegM = function(par) {
+  if(par.toUpperCase()=="(HL)") return true;
+  return ("ABCDEHL".indexOf(par.toUpperCase()))<0?false:true
+}
+var isRegPair = function(par) {
+  return (["BC","DE","HL","SP","AF"].indexOf(par.toUpperCase()))<0?false:true
+}
+var isIndirect = function(par) {
+  par = par.trim();
+  if(par[0]!="(") return false;
+  if(par[par.length-1]==")") return true;
+  return false;
+}
+
+var register = function(par) {
+  par = par.toUpperCase();
+  if (!isRegM(par)) croak ("cannot determine register " +par)
+  if(par=="(HL)") return "M";
+  return par
+}
+
+var noIndirect = function(par) {
+  return par.substr(1,par.length-2)
+}
+
+var regPair = function(par) {
+  par = par.toUpperCase();
+  if (!isRegPair(par)) croak ("cannot determine register pair " +par)
+  if(par=="AF") return "PSW"
+  if(par=="SP") return "SP"
+  return par[0];
+}
+
+
+
 var transZ2I = {
   "ex": function(par1,par2) {
     if ((par1.toUpperCase()=="DE") && (par2.toUpperCase()=="HL")) return ["XCHG","",""]
@@ -104,3 +146,4 @@ var transZ2I = {
   "rla": function(){return ["RAL","",""]},
   "rra": function(){return ["RAR","",""]}
 }
+module.exports = transZ2I;

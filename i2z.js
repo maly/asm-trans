@@ -82,62 +82,12 @@ var transI2Z = {
 
 
 
-  "or": function(par1) {
-    if(isRegM(par1)) return["ORA",register(par1),""]
-    return["ORI",par1,""]
-  },
-  "and": function(par1) {
-    if(isRegM(par1)) return["ANA",register(par1),""]
-    return["ANI",par1,""]
-  },
-  "xor": function(par1) {
-    if(isRegM(par1)) return["XRA",register(par1),""]
-    return["XRI",par1,""]
-  },
-  "cp": function(par1) {
-    if(isRegM(par1)) return["CMP",register(par1),""]
-    return["CPI",par1,""]
-  },
-  "sub": function(par1) {
-    if(isRegM(par1)) return["SUB",register(par1),""]
-    return["SUI",par1,""]
-  },
-  "sbc": function(par1) {
-    if(isRegM(par1)) return["SBB",register(par1),""]
-    return["SBI",par1,""]
-  },
-  "adc": function(par1) {
-    if(isRegM(par1)) return["ADC",register(par1),""]
-    return["ACI",par1,""]
-  },
-  "jp": function(par1,par2) {
-    if(!par2) return ["JMP",par1,""]
-    if(par1=="(HL)") return["PCHL","",""]
-    return["J"+par1.toUpperCase(),par2,""]
-  },
-  "call": function(par1,par2) {
-    if(!par2) return ["CALL",par1,""]
-    return["C"+par1.toUpperCase(),par2,""]
-  },
-  "ret": function(par1,par2) {
-    if(!par1) return ["RET","",""]
-    return["R"+par1.toUpperCase(),"",""]
-  },
+
   "push": function(par1,par2) {
     return["PUSH",regPairZ(par1),par2]
   },
   "pop": function(par1,par2) {
     return["POP",regPairZ(par1),par2]
-  },
-  "inc": function(par1,par2) {
-    if(isRegPair(par1))return["INX",regPair(par1),par2]
-    if(isRegM(par1)) return["INR",register(par1),""]
-    croak("inc")
-  },
-  "dec": function(par1,par2) {
-    if(isRegPair(par1))return["DCX",regPair(par1),par2]
-    if(isRegM(par1)) return["DCR",register(par1),""]
-    croak("inc")
   },
   "in": function(par1,par2) {
     return["IN","A",doIndirect(par1)]
@@ -159,3 +109,4 @@ var transI2Z = {
   "ral": function(){return ["RLA","",""]},
   "rar": function(){return ["RLA","",""]}
 }
+module.exports = transI2Z
